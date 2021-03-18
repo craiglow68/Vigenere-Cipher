@@ -1,17 +1,19 @@
+# Author: Jacob Craiglow
+# Description: Contains tools, charts, and a UI to help break a vigenere cipher
+# Usage: python vigenereTools.py cipherText
+
 from tokenizer import tokenize, tokenizeMult, tokenizePos
 from vigenereCipher import indexOfCoincidence, decrpytVigenere
 import sys
-'''
+
 if len(sys.argv) != 2:
     print("Incorrect usage.")
-    print('Usage: python hillTools.py cipherText.txt')
+    print('Usage: python vigenereTools.py cipherText.txt')
     sys.exit()
 
 f = open(str(sys.argv[1]))
 cipherText = f.read()
-f.close()'''
-
-cipherText = "ZCEKKIYWXOTQKRPBKSRRIZTPHWYJGBOVKZQOKGDFRWXEOBRPGMLSVSLUORPQZWNDRPZWNYTQJGZIIZTPHSCVVZLFKCYHLCZWOBQUUBERLHSHUHSHXPZWNPCHGHSHOBLQJCFWGHEKKGLPKFLWKPZWNGERVKSHTHTUKRMRZVRRLCCZGFOZNSYUKGEHJPFWCVLWGRTILSCHTQPWNSPJUQWLSPPUOGWLQSLQOBDWXIXHTHEKGHTVUIERLOOMAGEPKBEKKDFWYVTVLCZWJCHQGBTQYHLQZHZRYCZQUFERUZLWKVPLYZTNKZJWUATVYOMHGIELLIWSGGDDMSZIYIYOOUSWZVCRAUSWNSEUKSDZNOEKKWDOUCVLTUQRXKSDZVPZGBEVOGLOROCRABOKOAMXZVPGUSDQUHHDTHEKGHMHIOFVKWELYOWOGFZXTRSLSSGHXMDWKDTVGBPILCCWHCEKVVJVOQLORMLQJGALXWEXGZWBHSNDAGPKKWXDMWYHYVTVMCLOZCMHKLEHXBLOGBOGOGEDTH"
+f.close()
 
 cipherText = cipherText.strip()
 
@@ -21,14 +23,6 @@ unigramFreq = {'A': 8.167, 'B': 1.492, 'C': 2.782, 'D': 4.253, 'E': 12.702, 'F':
                'U': 2.758, 'V': 0.978, 'W': 2.360, 'X': 0.150, 'Y': 1.974, 'Z': 0.074}
 sortedUnigramFreq = sorted(
     unigramFreq.items(), key=lambda x: x[1], reverse=True)
-
-print("Kasiski Test results on 2, 3, 4, 5")
-
-for x in range(2, 6):
-    nFreq = tokenizePos(cipherText, x)
-    ngramFreq = sorted(nFreq.items(), key=lambda x: x[1][0], reverse=True)
-    print('=======================================================')
-    print(ngramFreq)
 
 print('=======================================================')
 
@@ -81,4 +75,7 @@ for x in rows:
     print(unigramsSorted)
     print('=======================================================')
 
-print(decrpytVigenere(cipherText, "GOLD"))
+print("Enter KeyWord:")
+key = input().upper()
+
+print(decrpytVigenere(cipherText, key))
